@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="SimpleInjector" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiDdd.Domain\ApiDdd.Domain.csproj" />
+    <ProjectReference Include="..\ApiDdd.Infra.Data\ApiDdd.Infra.Data.csproj" />
+    <ProjectReference Include="..\ApiDdd.Service\ApiDdd.Service.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -15,9 +15,9 @@ namespace ApiDdd.Application.Controllers
     public class ProdutoController : Controller
     {
 
-        private readonly IProdutoServiceApp _service;
+        private readonly IProdutoService _service;
 
-        public ProdutoController(IProdutoServiceApp service)
+        public ProdutoController(IProdutoService service)
         {
             _service = service;
         }

@@ -15,9 +15,9 @@ namespace ApiDdd.Application.Controllers
     public class UsuarioController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IUsuarioServiceApp _service;
+        private readonly IUsuarioService _service;
 
-        public UsuarioController(IUsuarioServiceApp service, IMapper mapper)
+        public UsuarioController(IUsuarioService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;

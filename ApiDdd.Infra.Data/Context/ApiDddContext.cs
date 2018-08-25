@@ -11,8 +11,8 @@ namespace ApiDdd.Infra.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
-            optionsBuilder.UseSqlServer(@"Server=(localdb);Database=apiddd;Uid=root;Pwd=00000000;");
+            if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ApiDddDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

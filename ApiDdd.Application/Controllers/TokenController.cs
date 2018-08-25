@@ -17,11 +17,11 @@ namespace ApiDdd.Application.Controllers
     public class TokenController : Controller
     {
         private readonly IConfiguration _config;
-        private readonly IUsuarioServiceApp _service;
+        private readonly IUsuarioService _service;
         private readonly IMapper _mapper;
 
 
-        public TokenController(IConfiguration config, IUsuarioServiceApp service, IMapper mapper)
+        public TokenController(IConfiguration config, IUsuarioService service, IMapper mapper)
         {
             _config = config;
             _service = service;

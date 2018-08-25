@@ -33,13 +33,8 @@ namespace ApiDdd.Application
         {
             var config = new HttpConfiguration();
 
-            //container.Register<IUsuarioService, UsuarioService>();
-            services.AddScoped<IProdutoServiceApp, ProdutoServiceApp>();
-
-            //container.Register<IUsuarioServiceApp, UsuarioServiceApp>();
             services.AddScoped<IProdutoService, ProdutoService>();
 
-            //container.Register<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

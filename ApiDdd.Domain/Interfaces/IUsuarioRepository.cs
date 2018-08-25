@@ -1,6 +1,4 @@
 ﻿using ApiDdd.Domain.Entities;
-using ApiDdd.Domain.Entities.Admin;
-using System.Collections.Generic;
 
 namespace ApiDdd.Domain.Interfaces
 {

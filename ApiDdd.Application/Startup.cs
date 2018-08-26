@@ -31,10 +31,10 @@ namespace ApiDdd.Application
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var config = new HttpConfiguration();
-
+            services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IProdutoService, ProdutoService>();
 
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

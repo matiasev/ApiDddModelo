@@ -2,22 +2,24 @@
 using ApiDdd.Domain.Interfaces;
 using ApiDdd.Infra.Data.Context;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ApiDdd.Infra.Data.Repository
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository : BaseRepository<Usuario>, IUsuarioRepository
     {
         private ApiDddContext context = new ApiDddContext();
 
-        public void Insert(Usuario obj)
+        public virtual async Task<Usuario> Insert(Usuario obj)
         {
-            context.Set<Usuario>().Add(obj);
+            var res = await context.Set<Usuario>().AddAsync(obj);
             context.SaveChanges();
+            return res.Entity ;
         }
 
-        public Usuario SelectByUser(Usuario obj)
+        public virtual Usuario SelectByUser(Usuario obj)
         {
-            return context.Set<Usuario>().SingleOrDefault(e => e.Email == obj.Email && e.Password == obj.Password);
+            return context.Set<Usuario>().FirstOrDefault(e => e.Email == obj.Email && e.Password == obj.Password);
 
         }
     }

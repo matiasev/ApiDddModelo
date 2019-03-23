@@ -17,14 +17,14 @@ namespace ApiDdd.Application.Controllers
     public class TokenController : Controller
     {
         private readonly IConfiguration _config;
-        private readonly IUsuarioService _service;
+        private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
 
 
-        public TokenController(IConfiguration config, IUsuarioService service, IMapper mapper)
+        public TokenController(IConfiguration config, IUsuarioService usuarioService, IMapper mapper)
         {
             _config = config;
-            _service = service;
+            _usuarioService = usuarioService;
             _mapper = mapper;
         }
 
@@ -65,9 +65,8 @@ namespace ApiDdd.Application.Controllers
             data = md5.ComputeHash(data);
             login.Password = Encoding.ASCII.GetString(data);
 
-            var user = _service.GetByUser(login);
+            var user = _usuarioService.GetByUser(login);
 
-            
             return user;
         }
     }

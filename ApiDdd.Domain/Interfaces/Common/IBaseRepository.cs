@@ -1,17 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiDdd.Domain.Interfaces
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {
-        void Insert(TEntity obj);
-
-        void Remove(int id);
-
         IList<TEntity> SelectAll();
+
+        Task<IList<TEntity>> SelectAllAsync();
 
         TEntity SelectById(int id);
 
-        void Update(TEntity obj);
+        Task<TEntity> SelectByIdAsync(int id);
+
+        TEntity Insert(TEntity obj);
+
+        Task<TEntity> InsertAsync(TEntity obj);
+
+        TEntity Update(TEntity obj);
+
+        Task<TEntity> UpdateAsync(TEntity obj);
+
+        TEntity Remove(int id);
     }
 }

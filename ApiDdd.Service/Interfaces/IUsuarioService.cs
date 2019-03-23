@@ -1,10 +1,12 @@
 ﻿using ApiDdd.Application.ViewModel;
+using ApiDdd.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace ApiDdd.Domain.Interfaces
 {
-    public interface IUsuarioService
+    public interface IUsuarioService : IBaseService<Usuario, UsuarioViewModel>
     {
-        void Add(UsuarioViewModel obj);
+        Task<UsuarioViewModel> Add(UsuarioViewModel obj);
 
         LoginViewModel GetByUser(LoginViewModel obj);
     }

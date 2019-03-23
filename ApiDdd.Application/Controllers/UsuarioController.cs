@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using ApiDdd.Application.ViewModel;
 using ApiDdd.Domain.Entities;
 using ApiDdd.Domain.Interfaces;
@@ -11,36 +12,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDdd.Application.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class UsuarioController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IUsuarioService _service;
+        private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(IUsuarioService service, IMapper mapper)
+        public UsuarioController(IUsuarioService usuarioService, IMapper mapper)
         {
-            _service = service;
+            _usuarioService = usuarioService;
             _mapper = mapper;
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] UsuarioViewModel item)
+        public async Task<IActionResult> Create([FromBody] UsuarioViewModel usuario)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (item == null)
-                    return NotFound();
-
-                item.Password = CreateHash(item.Password);
-
-
-                _service.Add(item);
-
-                return Ok();
+                usuario.Password = CreateHash(usuario.Password);
+                var response = await _usuarioService.Add(usuario);
+                if (response == null)
+                {
+                    return Json(new { success = false, message = "Your request has been failed" });
+                }
+                else
+                {
+                    return Json(new { success = true, message = "Your request has been processed" });
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex);
+                return Json(new { success = false, message = "Invalid" });
             }
         }
 

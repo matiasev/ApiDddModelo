@@ -57,8 +57,6 @@ namespace ApiDdd.Application
 
             services.AddMvc();
 
-            //Configurando o serviço de documentação do Swagger
-
            services.AddSwaggerGen(c =>
            {
                c.AddSecurityDefinition("Bearer", new ApiKeyScheme { In = "header", Description = "Please enter JWT with Bearer into field", Name = "Authorization", Type = "apiKey" });

@@ -1,10 +1,11 @@
 ﻿using ApiDdd.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace ApiDdd.Domain.Interfaces
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IBaseRepository<Usuario>
     {
-        void Insert(Usuario obj);
+        Task<Usuario> Insert(Usuario obj);
 
         Usuario SelectByUser(Usuario obj);
     }

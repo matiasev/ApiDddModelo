@@ -1,6 +1,7 @@
 ﻿using ApiDdd.Domain.Interfaces;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiDdd.Service.Services
 {
@@ -15,19 +16,14 @@ namespace ApiDdd.Service.Services
             _mapper = mapper;
         }
 
-        public void Add(TViewModel obj)
-        {
-            _repository.Insert(_mapper.Map<TEntity>(obj));
-        }
-
-        public void Delete(int id)
-        {
-            _repository.Remove(id);
-        }
-
         public IList<TViewModel> Get()
         {
             return _mapper.Map<IList<TViewModel>>(_repository.SelectAll());
+        }
+
+        public async Task<IList<TViewModel>> GetAsysc()
+        {
+            return await _mapper.Map<Task<IList<TViewModel>>>(_repository.SelectAllAsync());
         }
 
         public TViewModel GetById(int id)
@@ -35,10 +31,34 @@ namespace ApiDdd.Service.Services
             return _mapper.Map<TViewModel>(_repository.SelectById(id));
         }
 
-        public void Update(TViewModel obj)
+        public async Task<TViewModel> GetByIdAsync(int id)
         {
-            _repository.Update(_mapper.Map<TEntity>(obj));
+            return await _mapper.Map<Task<TViewModel>>(_repository.SelectByIdAsync(id));
+        }
 
+        public TViewModel Add(TViewModel obj)
+        {
+            return _mapper.Map<TViewModel>(_repository.Insert(_mapper.Map<TEntity>(obj)));
+        }
+
+        public async Task<TViewModel> AddAsync(TViewModel obj)
+        {
+            return await _mapper.Map<Task<TViewModel>>(_repository.InsertAsync(_mapper.Map<TEntity>(obj)));
+        }
+
+        public TViewModel Update(TViewModel obj)
+        {
+            return _mapper.Map<TViewModel>(_repository.Update(_mapper.Map<TEntity>(obj)));
+        }
+
+        public Task<TEntity> UpdateAsync(TViewModel obj)
+        {
+            return _mapper.Map<Task<TEntity>>(_repository.UpdateAsync(_mapper.Map<TEntity>(obj)));
+        }
+
+        public TViewModel Delete(int id)
+        {
+            return _mapper.Map<TViewModel>(_repository.Remove(id));
         }
     }
 }

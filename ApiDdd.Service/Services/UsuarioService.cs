@@ -2,23 +2,25 @@
 using ApiDdd.Domain.Entities;
 using ApiDdd.Domain.Interfaces;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace ApiDdd.Service.Services
 {
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService : BaseService<Usuario, UsuarioViewModel>, IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMapper _mapper;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, Mapper mapper)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
+            : base(usuarioRepository, mapper)
         {
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;
         }
 
-        public void Add(UsuarioViewModel obj)
+        public async Task<UsuarioViewModel> Add(UsuarioViewModel obj)
         {
-            _usuarioRepository.Insert(_mapper.Map<Usuario>(obj));
+            return await _mapper.Map<Task<UsuarioViewModel>>(_usuarioRepository.Insert(_mapper.Map<Usuario>(obj)));
         }
 
         public LoginViewModel GetByUser(LoginViewModel obj)

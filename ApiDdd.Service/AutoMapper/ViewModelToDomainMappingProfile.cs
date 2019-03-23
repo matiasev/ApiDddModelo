@@ -11,6 +11,9 @@ public class ViewModelToDomainMappingProfile : Profile
         CreateMap<UsuarioViewModel, Usuario>()
             .ConstructUsing(u => new Usuario(u.Nome, u.Email, u.Password));
 
+        CreateMap<LoginViewModel, Usuario>()
+            .ConstructUsing(l => new Usuario(null, l.Email, l.Password));
+
         CreateMap<LoginViewModel, Login>()
             .ConstructUsing(l => new Login(l.Email, l.Password));
 

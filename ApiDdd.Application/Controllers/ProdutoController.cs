@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using ApiDdd.Domain.Entities;
 using ApiDdd.Domain.Interfaces;
 using ApiDdd.Service.Services;
@@ -11,97 +13,88 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDdd.Application.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ProdutoController : Controller
     {
 
-        private readonly IProdutoService _service;
+        private readonly IProdutoService _produtoService;
 
-        public ProdutoController(IProdutoService service)
+        public ProdutoController(IProdutoService produtoService)
         {
-            _service = service;
+            _produtoService = produtoService;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IList<ProdutoViewModel>> Get()
         {
-            try
+            IList<ProdutoViewModel> produtos = await _produtoService.GetAsysc();
+            return produtos;
+        }
+
+        [HttpGet("{id}"), ]
+        public async Task<ProdutoViewModel> Get(int id)
+        {
+            ProdutoViewModel produto = await _produtoService.GetByIdAsync(id);
+            return produto;
+        }
+
+        //Todo: make it better
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] ProdutoViewModel produto)
+        {
+            if (ModelState.IsValid)
             {
-                return new ObjectResult(_service.Get());
+                var response = await _produtoService.AddAsync(produto);
+                if (response == null)
+                {
+                    return Json(new { success = false, message = "Your request has been failed" });
+                }
+                else
+                {
+                    return Json(new { success = true, message = "Your request has been processed" });
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex);
+                return Json(new { success = false, message = "Invalid" });
             }
         }
 
-        [HttpGet("{id}"), Authorize]
-        public IActionResult Get(int id)
+        //Todo: make it better
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] ProdutoViewModel produto)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (id == 0)
-                    return NotFound();
-
-                return new ObjectResult(_service.GetById(id));
+                var response = await _produtoService.UpdateAsync(produto);
+                if (response == null)
+                {
+                    return Json(new { success = false, message = "Your request has been failed" });
+                }
+                else
+                {
+                    return Json(new { success = true, message = "Your request has been processed" });
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex);
+                return Json(new { success = false, message = "Invalid" });
             }
         }
 
-        [HttpPost, Authorize]
-        public IActionResult Create([FromBody] ProdutoViewModel item)
-        {
-            try
-            {
-                if (item == null)
-                    return NotFound();
-
-                _service.Add(item);
-
-                return new ObjectResult(item.ProdutoId);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        [HttpPut, Authorize]
-        public IActionResult Update([FromBody] ProdutoViewModel item)
-        {
-            try
-            {
-                if (item == null)
-                    return NotFound();
-
-                _service.Update(item);
-
-                return new ObjectResult(item);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        [HttpDelete("{id}"), Authorize]
+        //Todo: make it better
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
+            var response = _produtoService.Delete(id);
+            if (response == null)
             {
-                if (id == 0)
-                    return NotFound();
-
-                _service.Delete(id);
-
-                return new NoContentResult();
+                return Json(new { success = false, message = "Your request has been failed" });
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex);
+                return Json(new { success = true, message = "Your request has been processed" });
             }
         }
     }

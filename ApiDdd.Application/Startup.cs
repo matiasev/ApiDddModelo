@@ -15,7 +15,6 @@ using System.Reflection;
 using ApiDdd.Domain.Interfaces;
 using ApiDdd.Service.Services;
 using ApiDdd.Infra.Data.Repository;
-using System.Web.Http;
 
 namespace ApiDdd.Application
 {
@@ -31,11 +30,11 @@ namespace ApiDdd.Application
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
 
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

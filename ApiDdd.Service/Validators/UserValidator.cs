@@ -7,11 +7,11 @@ using System.Text;
 
 namespace ApiDdd.Service.Validators
 {
-    public class UsuarioValidator : AbstractValidator<UsuarioViewModel>
+    public class UserValidator : AbstractValidator<UserViewModel>
     {
-        public UsuarioValidator()
+        public UserValidator()
         {
-            RuleFor(c => c.Nome)
+            RuleFor(c => c.Name)
                 .NotEmpty().WithMessage("É necessário informar o nome.")
                 .NotNull().WithMessage("É necessário informar o nome");
         }

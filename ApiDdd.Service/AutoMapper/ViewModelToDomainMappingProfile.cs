@@ -8,16 +8,16 @@ public class ViewModelToDomainMappingProfile : Profile
 {
     public ViewModelToDomainMappingProfile()
     {
-        CreateMap<UsuarioViewModel, Usuario>()
-            .ConstructUsing(u => new Usuario(u.Nome, u.Email, u.Password));
+        CreateMap<UserViewModel, User>()
+            .ConstructUsing(u => new User(u.Name, u.Email, u.Password));
 
-        CreateMap<LoginViewModel, Usuario>()
-            .ConstructUsing(l => new Usuario(null, l.Email, l.Password));
+        CreateMap<LoginViewModel, User>()
+            .ConstructUsing(l => new User(null, l.Email, l.Password));
 
         CreateMap<LoginViewModel, Login>()
             .ConstructUsing(l => new Login(l.Email, l.Password));
 
-        CreateMap<ProdutoViewModel, Produto>()
-            .ConstructUsing(p => new Produto(p.Nome, p.Quantidade, p.Status));
+        CreateMap<ProductViewModel, Product>()
+            .ConstructUsing(p => new Product(p.Name, p.Amount, p.Status));
     }
 }

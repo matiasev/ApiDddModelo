@@ -5,9 +5,9 @@ using AutoMapper;
 
 namespace ApiDdd.Service.Services
 {
-    public class ProdutoService : BaseService<Produto, ProdutoViewModel>, IProdutoService
+    public class ProductService : BaseService<Product, ProductViewModel>, IProductService
     {
-        public ProdutoService(IProdutoRepository repository, IMapper mapper)
+        public ProductService(IProductRepository repository, IMapper mapper)
             : base(repository, mapper)
         {
         }

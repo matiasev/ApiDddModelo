@@ -4,13 +4,13 @@ using System.Text;
 
 namespace ApiDdd.Service.ViewModel
 {
-    public class ProdutoViewModel
+    public class ProductViewModel
     {
-        public int ProdutoId { get; set; }
+        public int Id { get; set; }
 
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
-        public int Quantidade { get; set; }
+        public int Amount { get; set; }
 
         public bool Status { get; set; }
     }

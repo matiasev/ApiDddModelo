@@ -1,11 +1,8 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using ApiDdd.Application.ViewModel;
-using ApiDdd.Domain.Entities;
 using ApiDdd.Domain.Interfaces;
-using ApiDdd.Service.Validators;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,24 +11,24 @@ namespace ApiDdd.Application.Controllers
 {
     [AllowAnonymous]
     [Route("api/[controller]")]
-    public class UsuarioController : Controller
+    public class UserController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IUsuarioService _usuarioService;
+        private readonly IUserService _userService;
 
-        public UsuarioController(IUsuarioService usuarioService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper)
         {
-            _usuarioService = usuarioService;
+            _userService = userService;
             _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UsuarioViewModel usuario)
+        public async Task<IActionResult> Create([FromBody] UserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                usuario.Password = CreateHash(usuario.Password);
-                var response = await _usuarioService.Add(usuario);
+                user.Password = CreateHash(user.Password);
+                var response = await _userService.Add(user);
                 if (response == null)
                 {
                     return Json(new { success = false, message = "Your request has been failed" });

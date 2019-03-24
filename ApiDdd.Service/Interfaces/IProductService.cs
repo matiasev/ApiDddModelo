@@ -3,7 +3,7 @@ using ApiDdd.Service.ViewModel;
 
 namespace ApiDdd.Domain.Interfaces
 {
-    public interface IProdutoService : IBaseService<Produto, ProdutoViewModel>
+    public interface IProductService : IBaseService<Product, ProductViewModel>
     {
     }
 }

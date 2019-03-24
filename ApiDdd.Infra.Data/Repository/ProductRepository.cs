@@ -3,7 +3,7 @@ using ApiDdd.Domain.Interfaces;
 
 namespace ApiDdd.Infra.Data.Repository
 {
-    public class ProdutoRepository : BaseRepository<Produto>, IProdutoRepository
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ApiDdd.Domain.Interfaces
 {
-    public interface IProdutoRepository : IBaseRepository<Produto>
+    public interface IProductRepository : IBaseRepository<Product>
     {
     }
 }

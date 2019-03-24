@@ -4,21 +4,21 @@ using System.Text;
 
 namespace ApiDdd.Domain.Entities
 {
-    public class Usuario
+    public class User
     {
-        public int UsuarioID { get; private set; }
+        public int ID { get; private set; }
 
-        public string Nome { get; private set; }
+        public string Name { get; private set; }
 
         public string Email { get; private set; }
 
         public string Password { get; private set; }
 
-        protected Usuario() { }
+        protected User() { }
 
-        public Usuario(string nome, string email, string password)
+        public User(string name, string email, string password)
         {
-            Nome = nome;
+            Name = name;
             Email = email;
             Password = password;
         }

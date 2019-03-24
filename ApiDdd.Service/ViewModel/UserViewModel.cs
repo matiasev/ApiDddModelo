@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ApiDdd.Application.ViewModel
 {
-    public class UsuarioViewModel
+    public class UserViewModel
     {
-        public int UsuarioID { get; set; }
+        public int ID { get; set; }
 
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
         public string Email { get; set; }
 

@@ -7,17 +7,17 @@ using System.Text;
 
 namespace ApiDdd.Infra.Data.Mapping
 {
-    public class UsuarioMap : IEntityTypeConfiguration<Usuario>
+    public class UserMap : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Usuario> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("Usuario");
+            builder.ToTable("User");
 
-            builder.HasKey(c => c.UsuarioID);
+            builder.HasKey(c => c.ID);
 
-            builder.Property(c => c.Nome)
+            builder.Property(c => c.Name)
                 .IsRequired()
-                .HasColumnName("Nome");
+                .HasColumnName("Name");
 
             builder.Property(c => c.Email)
                 .IsRequired()

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ApiDdd.Domain.Entities;
 using ApiDdd.Domain.Interfaces;
-using ApiDdd.Service.Services;
-using ApiDdd.Service.Validators;
 using ApiDdd.Service.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,37 +9,37 @@ namespace ApiDdd.Application.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class ProdutoController : Controller
+    public class ProductController : Controller
     {
 
-        private readonly IProdutoService _produtoService;
+        private readonly IProductService _productService;
 
-        public ProdutoController(IProdutoService produtoService)
+        public ProductController(IProductService productService)
         {
-            _produtoService = produtoService;
+            _productService = productService;
         }
 
         [HttpGet]
-        public async Task<IList<ProdutoViewModel>> Get()
+        public async Task<IList<ProductViewModel>> Get()
         {
-            IList<ProdutoViewModel> produtos = await _produtoService.GetAsysc();
-            return produtos;
+            IList<ProductViewModel> products = await _productService.GetAsysc();
+            return products;
         }
 
         [HttpGet("{id}"), ]
-        public async Task<ProdutoViewModel> Get(int id)
+        public async Task<ProductViewModel> Get(int id)
         {
-            ProdutoViewModel produto = await _produtoService.GetByIdAsync(id);
-            return produto;
+            ProductViewModel product = await _productService.GetByIdAsync(id);
+            return product;
         }
 
         //Todo: make it better
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ProdutoViewModel produto)
+        public async Task<IActionResult> Create([FromBody] ProductViewModel product)
         {
             if (ModelState.IsValid)
             {
-                var response = await _produtoService.AddAsync(produto);
+                var response = await _productService.AddAsync(product);
                 if (response == null)
                 {
                     return Json(new { success = false, message = "Your request has been failed" });
@@ -63,11 +57,11 @@ namespace ApiDdd.Application.Controllers
 
         //Todo: make it better
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] ProdutoViewModel produto)
+        public async Task<IActionResult> Update([FromBody] ProductViewModel product)
         {
             if (ModelState.IsValid)
             {
-                var response = await _produtoService.UpdateAsync(produto);
+                var response = await _productService.UpdateAsync(product);
                 if (response == null)
                 {
                     return Json(new { success = false, message = "Your request has been failed" });
@@ -87,7 +81,7 @@ namespace ApiDdd.Application.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var response = _produtoService.Delete(id);
+            var response = _productService.Delete(id);
             if (response == null)
             {
                 return Json(new { success = false, message = "Your request has been failed" });

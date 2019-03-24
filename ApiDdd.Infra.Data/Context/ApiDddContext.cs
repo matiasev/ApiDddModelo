@@ -6,8 +6,8 @@ namespace ApiDdd.Infra.Data.Context
 {
     public class ApiDddContext: DbContext
     {
-        public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<Produto> Produto { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Product> Product { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,9 +19,9 @@ namespace ApiDdd.Infra.Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
+            modelBuilder.Entity<User>(new UserMap().Configure);
 
-            modelBuilder.Entity<Produto>(new ProdutoMap().Configure);
+            modelBuilder.Entity<Product>(new ProductMap().Configure);
         }
     }
 }

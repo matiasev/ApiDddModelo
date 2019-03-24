@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace ApiDdd.Domain.Interfaces
 {
-    public interface IUsuarioService : IBaseService<Usuario, UsuarioViewModel>
+    public interface IUserService : IBaseService<User, UserViewModel>
     {
-        Task<UsuarioViewModel> Add(UsuarioViewModel obj);
+        Task<UserViewModel> Add(UserViewModel obj);
 
         LoginViewModel GetByUser(LoginViewModel obj);
     }

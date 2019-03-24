@@ -1,5 +1,4 @@
 ﻿using ApiDdd.Application.ViewModel;
-using ApiDdd.Domain.Entities;
 using ApiDdd.Domain.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -17,14 +16,14 @@ namespace ApiDdd.Application.Controllers
     public class TokenController : Controller
     {
         private readonly IConfiguration _config;
-        private readonly IUsuarioService _usuarioService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
 
-        public TokenController(IConfiguration config, IUsuarioService usuarioService, IMapper mapper)
+        public TokenController(IConfiguration config, IUserService userService, IMapper mapper)
         {
             _config = config;
-            _usuarioService = usuarioService;
+            _userService = userService;
             _mapper = mapper;
         }
 
@@ -65,7 +64,7 @@ namespace ApiDdd.Application.Controllers
             data = md5.ComputeHash(data);
             login.Password = Encoding.ASCII.GetString(data);
 
-            var user = _usuarioService.GetByUser(login);
+            var user = _userService.GetByUser(login);
 
             return user;
         }
